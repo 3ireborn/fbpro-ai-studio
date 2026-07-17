@@ -1,6 +1,6 @@
 <!--
 ═══════════════════════════════════════════════════════════════
-🚀 FB PRO AI STUDIO V5.0 ULTIMATE
+🚀 FB PRO AI STUDIO V5.1 (FIXED)
 Bodi: V2.0 | Mesin AI: V4.2 Super Engine
 Ultimate Facebook Content Creator
 ═══════════════════════════════════════════════════════════════
@@ -12,7 +12,7 @@ Ultimate Facebook Content Creator
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>🚀 FB PRO AI STUDIO V5.0</title>
+    <title>🚀 FB PRO AI STUDIO V5.1</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font -->
@@ -27,9 +27,7 @@ Ultimate Facebook Content Creator
             theme: {
                 extend: {
                     fontFamily: { poppins: ['Poppins', 'sans-serif'] },
-                    colors: {
-                        darkbg: '#0f172a',
-                    }
+                    colors: { darkbg: '#0f172a' }
                 }
             }
         }
@@ -41,7 +39,7 @@ Ultimate Facebook Content Creator
     <div id="loadingScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950 transition-opacity duration-500">
         <div class="text-6xl mb-6 animate-bounce">🚀</div>
         <h1 class="text-3xl font-extrabold tracking-wide text-center">FB PRO AI STUDIO</h1>
-        <p class="text-xl font-semibold text-yellow-400 mt-2">V5.0 Ultimate Engine</p>
+        <p class="text-xl font-semibold text-yellow-400 mt-2">V5.1 Ultimate Engine</p>
         <p class="mt-4 text-slate-300">Powered by</p>
         <h2 class="text-lg font-bold text-blue-400">NPA Smart System VVIP</h2>
         <div class="mt-8 w-56 h-2 rounded-full bg-slate-700 overflow-hidden">
@@ -59,7 +57,7 @@ Ultimate Facebook Content Creator
                     <div class="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-3xl shadow-lg shadow-blue-500/30">🚀</div>
                     <div>
                         <h1 class="text-lg font-extrabold">AI STUDIO</h1>
-                        <p class="text-xs text-yellow-400">V5.0 Ultimate</p>
+                        <p class="text-xs text-yellow-400">V5.1 Ultimate</p>
                     </div>
                 </div>
                 <div class="mt-5 rounded-xl bg-slate-800 p-4 text-center border border-slate-700">
@@ -115,13 +113,14 @@ Ultimate Facebook Content Creator
                     <div class="lg:col-span-5 rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl"></div>
                         <h2 class="text-2xl font-bold mb-2">📸 Upload Photo</h2>
-                        <p class="text-slate-400 mb-6 text-sm">Upload foto produk atau wajah untuk dianlisa AI.</p>
+                        <p class="text-slate-400 mb-6 text-sm">Upload foto produk atau wajah untuk dianalisa AI.</p>
                         <div class="border-2 border-dashed border-slate-700 rounded-2xl p-4 text-center hover:border-blue-500 transition bg-slate-800/50">
                             <img id="previewImage" src="https://placehold.co/600x400/1e293b/FFFFFF?text=PREVIEW+GAMBAR" class="w-full h-48 object-cover rounded-xl shadow-lg mb-4">
+                            <!-- PERBAIKAN: Tombol File Upload Pakai Label -->
                             <input id="photoUpload" type="file" accept="image/*" class="hidden">
-                            <button onclick="document.getElementById('photoUpload').click()" class="w-full bg-blue-600 hover:bg-blue-500 rounded-xl py-3 font-bold shadow-lg shadow-blue-500/30 transition-all">
+                            <label for="photoUpload" class="block w-full bg-blue-600 hover:bg-blue-500 rounded-xl py-3 font-bold shadow-lg shadow-blue-500/30 transition-all cursor-pointer">
                                 📁 Pilih Foto
-                            </button>
+                            </label>
                         </div>
                     </div>
 
@@ -182,7 +181,8 @@ Ultimate Facebook Content Creator
             </section>
 
             <!-- OUTPUT CENTER -->
-            <section class="px-6 pb-10">
+            <!-- PERBAIKAN: Menambahkan id="outputSection" yang hilang -->
+            <section id="outputSection" class="px-6 pb-10">
                 <div class="rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl">
                     <h2 class="text-2xl font-bold mb-6 border-b border-slate-800 pb-4">✨ Hasil AI Generator</h2>
                     
@@ -228,7 +228,7 @@ Ultimate Facebook Content Creator
         </main>
     </div>
 
-    <!-- AI LOADING MODAL (LAYAR HITAM V2) -->
+    <!-- AI LOADING MODAL -->
     <div id="aiLoading" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center z-50 transition-all">
         <div class="bg-slate-900 rounded-3xl border border-slate-700 p-10 w-[360px] text-center shadow-[0_0_50px_rgba(6,182,212,0.2)]">
             <div class="text-6xl animate-spin mb-6">⚙️</div>
@@ -240,7 +240,7 @@ Ultimate Facebook Content Creator
         </div>
     </div>
 
-    <!-- MESIN JAVASCRIPT V4.2 -->
+    <!-- MESIN JAVASCRIPT V5.1 FIXED -->
     <script>
         // 1. Hapus Splash Screen
         document.addEventListener("DOMContentLoaded", function () {
@@ -271,12 +271,14 @@ Ultimate Facebook Content Creator
         // 4. File Upload Preview Base64
         let base64Image = "";
         document.getElementById('photoUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
             const reader = new FileReader();
             reader.onload = function(event) {
                 document.getElementById('previewImage').src = event.target.result;
                 base64Image = event.target.result.split(',')[1];
             };
-            if(e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+            reader.readAsDataURL(file);
         });
 
         // 5. COPY FUNCTION
@@ -289,6 +291,9 @@ Ultimate Facebook Content Creator
 
         // 6. CORE AI ENGINE GEMINI
         document.getElementById('btnGenerateAll').addEventListener('click', async function() {
+            const btn = this;
+            const originalBtnText = btn.innerHTML;
+            
             const apiKey = document.getElementById('apiKey').value.trim();
             const style = document.getElementById('style').value;
             
@@ -298,10 +303,16 @@ Ultimate Facebook Content Creator
                 if (!product) return alert("Komandan, ketik dulu nama produk custom-nya! 🫡");
             }
             
-            if (!apiKey || !base64Image) return alert("Komandan, Isi API Key & Pilih Foto dulu! 🫡");
+            if (!apiKey || !base64Image) {
+                return alert("Komandan, pastikan API Key sudah diisi dan Foto sudah di-upload! 🫡");
+            }
 
             // Simpan Kunci
             localStorage.setItem("fbpro_api_key", apiKey);
+
+            // Matikan tombol sementara agar tidak dobel klik
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Proses Meracik...`;
 
             // Tampilkan Modal Loading Keren
             const loadingModal = document.getElementById('aiLoading');
@@ -336,7 +347,7 @@ Ultimate Facebook Content Creator
                 
                 const firstCandidate = data.candidates[0];
                 if (!firstCandidate.content || !firstCandidate.content.parts) {
-                    throw new Error("Diblokir sistem keamanan AI. Coba foto yang lebih umum/bukan wajah close-up!");
+                    throw new Error("Diblokir sistem keamanan AI. Coba foto yang lebih umum!");
                 }
 
                 let rawText = firstCandidate.content.parts[0].text.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim();
@@ -354,8 +365,15 @@ Ultimate Facebook Content Creator
                 loadingModal.classList.remove('flex');
                 loadingModal.classList.add('hidden');
                 
-                // Scroll halus ke area hasil
-                document.getElementById("outputSection").scrollIntoView({ behavior: 'smooth' });
+                // Kembalikan tombol ke semula
+                btn.disabled = false;
+                btn.innerHTML = originalBtnText;
+
+                // PERBAIKAN: Scroll halus ke area hasil yang ID-nya sudah ditambahkan
+                const targetScroll = document.getElementById("outputSection");
+                if(targetScroll) {
+                    targetScroll.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     </script>
