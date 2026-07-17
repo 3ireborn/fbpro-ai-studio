@@ -55,7 +55,7 @@
             </button>
         </div>
 
-        <!-- OUTPUT SECTION (Hidden by default) -->
+        <!-- OUTPUT SECTION -->
         <div id="outputSection" class="glass p-6 rounded-2xl shadow-xl space-y-6 hidden">
             <h2 class="text-xl font-bold text-emerald-400 font-m text-center border-b border-slate-700 pb-4">✅ KONTEN SIAP COPY</h2>
             
@@ -138,7 +138,8 @@
             const promptText = `Anda adalah Ahli Digital Marketing FB Pro spesialis closing bisnis 3IReborn. Analisa gambar ini dan hasilkan 5 hal berikut. BALAS HANYA DENGAN FORMAT JSON VALID tanpa teks tambahan apapun. Gunakan key ini persis: {"prompt": "Ide Prompt Thumbnail", "overlay": "Teks overlay Clickbait max 4 kata", "caption": "Caption storytelling yang emosional dan jualan", "cta": "Kalimat ajakan klik link/komen", "hashtag": "#hashtag1 #hashtag2"}`;
 
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                // BUG FIX: Mengubah endpoint ke gemini-1.5-flash-latest yang lebih stabil
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -161,11 +162,11 @@
                 const resultJSON = JSON.parse(rawText);
 
                 // Tampilkan ke textarea
-                document.getElementById('outPrompt').value = resultJSON.prompt;
-                document.getElementById('outOverlay').value = resultJSON.overlay;
-                document.getElementById('outCaption').value = resultJSON.caption;
-                document.getElementById('outCTA').value = resultJSON.cta;
-                document.getElementById('outHashtag').value = resultJSON.hashtag;
+                document.getElementById('outPrompt').value = resultJSON.prompt || "Gagal membuat prompt.";
+                document.getElementById('outOverlay').value = resultJSON.overlay || "Gagal membuat overlay.";
+                document.getElementById('outCaption').value = resultJSON.caption || "Gagal membuat caption.";
+                document.getElementById('outCTA').value = resultJSON.cta || "Gagal membuat CTA.";
+                document.getElementById('outHashtag').value = resultJSON.hashtag || "Gagal membuat hashtag.";
 
                 // Munculkan hasil
                 outputSection.classList.remove('hidden');
