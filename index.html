@@ -1,178 +1,312 @@
+<!--
+═══════════════════════════════════════════════════════════════
+🚀 FB PRO AI STUDIO V5.0 ULTIMATE
+Bodi: V2.0 | Mesin AI: V4.2 Super Engine
+Ultimate Facebook Content Creator
+═══════════════════════════════════════════════════════════════
+-->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB PRO AI STUDIO V4.2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>🚀 FB PRO AI STUDIO V5.0</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .bg-gold { background: linear-gradient(to right, #d97706, #f59e0b, #fbbf24); }
-        .text-gold { color: #fbbf24; }
-        .glass { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .loader { border: 4px solid #334155; border-top: 4px solid #fbbf24; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: none; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { poppins: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        darkbg: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="min-h-screen p-4 flex justify-center items-start">
-    <div class="max-w-4xl w-full space-y-6">
-        
-        <!-- HEADER -->
-        <div class="text-center mb-6 relative">
-            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block shadow-[0_0_15px_rgba(37,99,235,0.6)]">V4.2 Custom Product</span>
-            <h1 class="text-3xl font-black text-white uppercase tracking-wide mt-2">FB PRO <span class="text-gold">AI STUDIO</span></h1>
-            <p class="text-slate-400 text-sm">Dilengkapi Input Custom Bisnis & Visual Master</p>
+<body class="bg-darkbg text-white font-poppins overflow-x-hidden">
+
+    <!-- SPLASH SCREEN -->
+    <div id="loadingScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950 transition-opacity duration-500">
+        <div class="text-6xl mb-6 animate-bounce">🚀</div>
+        <h1 class="text-3xl font-extrabold tracking-wide text-center">FB PRO AI STUDIO</h1>
+        <p class="text-xl font-semibold text-yellow-400 mt-2">V5.0 Ultimate Engine</p>
+        <p class="mt-4 text-slate-300">Powered by</p>
+        <h2 class="text-lg font-bold text-blue-400">NPA Smart System VVIP</h2>
+        <div class="mt-8 w-56 h-2 rounded-full bg-slate-700 overflow-hidden">
+            <div class="h-full w-full bg-gradient-to-r from-blue-500 via-cyan-400 to-yellow-400 animate-pulse"></div>
         </div>
-
-        <!-- INPUT SECTION -->
-        <div class="glass p-6 rounded-2xl shadow-xl space-y-6">
-            
-            <!-- API Key -->
-            <div>
-                <div class="flex justify-between items-end mb-2">
-                    <label class="block text-sm font-bold text-gold uppercase tracking-wider">🔑 1. API Key</label>
-                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-xs bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg transition-all animate-pulse">Buat API Key Di Sini (Gratis)</a>
-                </div>
-                <input type="password" id="apiKey" placeholder="Paste API Key Ndan di sini..." class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
-            </div>
-
-            <!-- Upload Foto -->
-            <div>
-                <label class="block text-sm font-bold text-gold mb-2">📸 2. Upload Foto / Produk</label>
-                <input type="file" id="imageInput" accept="image/*" class="w-full text-slate-300">
-                <div class="mt-4 hidden" id="previewContainer"><img id="imagePreview" class="max-h-48 rounded-xl mx-auto" src="" alt="Preview"></div>
-            </div>
-
-            <!-- Gaya & Produk -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2">🎭 3. Gaya Bahasa</label>
-                    <select id="style" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
-                        <option value="FOMO (Fear Of Missing Out), menakut-nakuti agar merasa rugi">🔥 FOMO</option>
-                        <option value="Pro Kontra, memancing perdebatan agar viral">⚔️ Pro Kontra</option>
-                        <option value="Sarkas dan menohok, menyindir halus">😏 Sarkas</option>
-                        <option value="Storytelling, kisah emosional">📖 Storytelling</option>
-                        <option value="Motivasi, membakar semangat">🔥 Motivasi</option>
-                        <option value="Edukasi, memberikan tips praktis">💡 Edukasi</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2">📦 4. Produk / Bisnis</label>
-                    <select id="product" onchange="toggleCustomInput()" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-all">
-                        <option value="3iReborn">🛡️ 3iReborn</option>
-                        <option value="Istikmal Syariah">🕌 Istikmal Syariah</option>
-                        <option value="NPA">🤖 NPA</option>
-                        <option value="Affiliate Digital">💻 Affiliate Digital</option>
-                        <option value="Affiliate shoope">👚 Affiliate shopee</option>
-                        <option value="UMKM & Kuliner">🍱 UMKM & Kuliner</option>
-                        <option value="Produk Herbal & Kesehatan">🌿 Produk Herbal & Kesehatan</option>
-                        <option value="Properti & Real Estate">🏠 Properti & Real Estate</option>
-                        <option value="Custom">✍️ Produk Lainnya (Custom)</option>
-                    </select>
-                    <!-- Input text tersembunyi untuk Custom Produk -->
-                    <input type="text" id="customProduct" placeholder="Ketik nama bisnis/produk di sini..." class="w-full bg-slate-700 border border-amber-500 rounded-lg px-4 py-3 text-white mt-3 hidden transition-all shadow-[0_0_10px_rgba(245,158,11,0.2)]">
-                </div>
-            </div>
-
-            <button id="generateBtn" class="w-full bg-gold hover:opacity-90 text-slate-900 font-black py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-                <span id="btnText">🚀 GENERATE KONTEN</span>
-                <div class="loader" id="loader"></div>
-            </button>
-        </div>
-
-        <!-- OUTPUT SECTION -->
-        <div id="outputSection" class="glass p-6 rounded-2xl shadow-xl space-y-6 hidden">
-            <div class="space-y-2">
-                <label class="text-xs font-bold text-slate-400 uppercase">Prompt Thumbnail (Sudah Injeksi 5 Formula Visual)</label>
-                <textarea id="outPrompt" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-4 text-sm h-48 resize-none leading-relaxed text-emerald-300"></textarea>
-                <button onclick="copyTeks('outPrompt')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-bold transition">📋 Copy Super Prompt</button>
-            </div>
-
-            <div class="space-y-2">
-                <label class="text-xs font-bold text-slate-400 uppercase">Caption Facebook Pro</label>
-                <textarea id="outCaption" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-4 text-sm h-56 resize-none leading-relaxed"></textarea>
-                <button onclick="copyTeks('outCaption')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-bold transition">📋 Copy Caption</button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="space-y-2">
-                    <label class="text-xs font-bold text-slate-400 uppercase">Call To Action (CTA)</label>
-                    <textarea id="outCTA" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-24 resize-none"></textarea>
-                    <button onclick="copyTeks('outCTA')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 rounded font-bold transition">📋 Copy CTA</button>
-                </div>
-                <div class="space-y-2">
-                    <label class="text-xs font-bold text-slate-400 uppercase">Hashtag</label>
-                    <textarea id="outHashtag" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-24 resize-none"></textarea>
-                    <button onclick="copyTeks('outHashtag')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 rounded font-bold transition">📋 Copy Hashtag</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- FOOTER EDUKASI -->
-        <div class="mt-8 pt-6 border-t border-slate-700 text-center space-y-2 pb-8">
-            <h3 class="text-sm font-bold text-slate-300">💡 Kenapa Harus Pakai API Key Sendiri?</h3>
-            <p class="text-xs text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                API Key adalah "kunci akses" rahasia untuk menyambungkan aplikasi ini langsung ke otak superkomputer Google (Gemini AI). Dengan memakai kunci Anda sendiri, aplikasi ini bisa berjalan super cepat murni di dalam <i>browser</i> HP Anda, tanpa kami harus menyewa <i>server</i> perantara yang mahal. Artinya? <b>Privasi foto Anda 100% aman</b> dan Anda bisa menggunakannya <b>GRATIS!</b>
-            </p>
-        </div>
-
     </div>
 
+    <!-- MAIN WRAPPER -->
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+        <aside class="hidden lg:flex flex-col w-72 bg-slate-900 border-r border-slate-800 shadow-2xl">
+            <div class="p-6 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-3xl shadow-lg shadow-blue-500/30">🚀</div>
+                    <div>
+                        <h1 class="text-lg font-extrabold">AI STUDIO</h1>
+                        <p class="text-xs text-yellow-400">V5.0 Ultimate</p>
+                    </div>
+                </div>
+                <div class="mt-5 rounded-xl bg-slate-800 p-4 text-center border border-slate-700">
+                    <p class="text-xs text-slate-400">Powered by</p>
+                    <h3 class="text-sm font-bold text-cyan-400">NPA Smart System VVIP</h3>
+                </div>
+            </div>
+            <nav class="flex-1 overflow-y-auto p-4 space-y-2">
+                <a href="#" class="flex items-center gap-3 rounded-xl bg-blue-600 px-4 py-3 font-semibold shadow-lg shadow-blue-500/20"><i class="fa-solid fa-house"></i> Dashboard</a>
+                <a href="#" class="flex items-center gap-3 rounded-xl px-4 py-3 hover:bg-slate-800 transition text-slate-400 hover:text-white"><i class="fa-solid fa-pen"></i> Caption Studio</a>
+                <a href="#" class="flex items-center gap-3 rounded-xl px-4 py-3 hover:bg-slate-800 transition text-slate-400 hover:text-white"><i class="fa-solid fa-image"></i> Thumbnail Studio</a>
+            </nav>
+            <div class="border-t border-slate-800 p-5 text-center">
+                <p class="text-xs text-slate-500">© 2026</p>
+                <p class="text-xs text-yellow-400">Auto-Save Memory Active 🟢</p>
+            </div>
+        </aside>
+
+        <!-- CONTENT WRAPPER -->
+        <main class="flex-1">
+            
+            <!-- TOP HEADER -->
+            <header class="sticky top-0 z-30 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800">
+                <div class="flex items-center justify-between px-6 py-4">
+                    <div class="flex items-center gap-4">
+                        <button id="btnSidebar" class="lg:hidden w-11 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 transition flex items-center justify-center"><i class="fa-solid fa-bars"></i></button>
+                        <div>
+                            <h1 class="text-2xl font-extrabold">Dashboard</h1>
+                            <p class="text-sm text-slate-400">Welcome to FB PRO AI STUDIO</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="hidden md:flex items-center gap-2 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-4 py-2 rounded-full">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-sm font-semibold">Gemini AI Ready</span>
+                        </div>
+                        <div class="flex items-center gap-3 rounded-2xl bg-slate-800 px-4 py-2 border border-slate-700">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-lg font-bold">🚀</div>
+                            <div class="hidden md:block">
+                                <h3 class="font-bold text-sm">Sugiarto / PakD</h3>
+                                <p class="text-xs text-yellow-400">Komandan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- UPLOAD & SETTINGS SECTION -->
+            <section class="p-6">
+                <div class="grid lg:grid-cols-12 gap-6">
+                    
+                    <!-- LEFT PANEL: UPLOAD -->
+                    <div class="lg:col-span-5 rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full blur-3xl"></div>
+                        <h2 class="text-2xl font-bold mb-2">📸 Upload Photo</h2>
+                        <p class="text-slate-400 mb-6 text-sm">Upload foto produk atau wajah untuk dianlisa AI.</p>
+                        <div class="border-2 border-dashed border-slate-700 rounded-2xl p-4 text-center hover:border-blue-500 transition bg-slate-800/50">
+                            <img id="previewImage" src="https://placehold.co/600x400/1e293b/FFFFFF?text=PREVIEW+GAMBAR" class="w-full h-48 object-cover rounded-xl shadow-lg mb-4">
+                            <input id="photoUpload" type="file" accept="image/*" class="hidden">
+                            <button onclick="document.getElementById('photoUpload').click()" class="w-full bg-blue-600 hover:bg-blue-500 rounded-xl py-3 font-bold shadow-lg shadow-blue-500/30 transition-all">
+                                📁 Pilih Foto
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT PANEL: SETTINGS -->
+                    <div class="lg:col-span-7 rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl relative overflow-hidden">
+                        <div class="absolute bottom-0 right-0 w-40 h-40 bg-yellow-500/10 rounded-full blur-3xl"></div>
+                        <h2 class="text-2xl font-bold mb-6">⚙️ Mesin Pengaturan</h2>
+                        <div class="space-y-4">
+                            
+                            <!-- API Key -->
+                            <div>
+                                <div class="flex justify-between items-end mb-2">
+                                    <label class="text-sm font-bold text-yellow-400">🔑 API Key Gemini</label>
+                                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] bg-red-600 hover:bg-red-500 text-white font-bold px-2 py-1 rounded shadow-lg transition-all">Buat API Gratis</a>
+                                </div>
+                                <input type="password" id="apiKey" placeholder="Paste API Key Ndan di sini..." class="w-full rounded-xl bg-slate-800 p-3 outline-none border border-slate-700 focus:border-blue-500 text-sm">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Produk -->
+                                <div>
+                                    <label class="text-sm font-bold text-cyan-400 block mb-2">📦 Produk / Bisnis</label>
+                                    <select id="product" onchange="toggleCustomInput()" class="w-full rounded-xl bg-slate-800 p-3 outline-none border border-slate-700 focus:border-blue-500 text-sm">
+                                        <option value="3iReborn">🛡️ 3iReborn</option>
+                                        <option value="Istikmal Syariah">🕌 Istikmal Syariah</option>
+                                        <option value="NPA">🤖 NPA</option>
+                                        <option value="Affiliate Digital">💻 Affiliate Digital</option>
+                                        <option value="UMKM & Kuliner">🍱 UMKM & Kuliner</option>
+                                        <option value="Produk Herbal & Kesehatan">🌿 Produk Herbal & Kesehatan</option>
+                                        <option value="Properti & Real Estate">🏠 Properti & Real Estate</option>
+                                        <option value="Custom">✍️ Custom (Ketik Sendiri)</option>
+                                    </select>
+                                    <input type="text" id="customProduct" placeholder="Ketik nama bisnis..." class="w-full mt-3 rounded-xl bg-slate-800 p-3 outline-none border border-amber-500 hidden text-sm shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                                </div>
+                                <!-- Gaya Bahasa -->
+                                <div>
+                                    <label class="text-sm font-bold text-emerald-400 block mb-2">🎭 Gaya Copywriting</label>
+                                    <select id="style" class="w-full rounded-xl bg-slate-800 p-3 outline-none border border-slate-700 focus:border-blue-500 text-sm">
+                                        <option value="FOMO (Fear Of Missing Out), menakut-nakuti agar merasa rugi">🔥 FOMO (Nedesak)</option>
+                                        <option value="Pro Kontra, memancing perdebatan agar viral">⚔️ Pro Kontra (Viral)</option>
+                                        <option value="Sarkas dan menohok, menyindir halus">😏 Sarkas (Nyindir)</option>
+                                        <option value="Storytelling, kisah emosional">📖 Storytelling</option>
+                                        <option value="Motivasi, membakar semangat">🔥 Motivasi</option>
+                                        <option value="Edukasi, memberikan tips praktis">💡 Edukasi</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Tombol Generate Utama -->
+                            <div class="pt-4">
+                                <button id="btnGenerateAll" class="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-sky-500 hover:scale-[1.02] transition-all font-bold text-lg shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                                    🚀 GENERATE KONTEN SEKARANG
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OUTPUT CENTER -->
+            <section class="px-6 pb-10">
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-6 border-b border-slate-800 pb-4">✨ Hasil AI Generator</h2>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <!-- OUTPUT PROMPT -->
+                        <div class="bg-slate-800/50 border border-slate-700 p-5 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h2 class="font-bold text-yellow-400">🎨 Prompt Thumbnail 3D</h2>
+                                <button onclick="copyTeks('outputPrompt')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                            <textarea id="outputPrompt" rows="6" class="w-full bg-slate-900 rounded-xl p-4 text-sm text-emerald-300 outline-none resize-none border border-slate-800" placeholder="Prompt visual master akan muncul di sini..."></textarea>
+                        </div>
+
+                        <!-- OUTPUT CAPTION -->
+                        <div class="bg-slate-800/50 border border-slate-700 p-5 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h2 class="font-bold text-blue-400">📝 Caption Facebook Pro</h2>
+                                <button onclick="copyTeks('outputCaption')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                            <textarea id="outputCaption" rows="6" class="w-full bg-slate-900 rounded-xl p-4 text-sm text-slate-200 outline-none resize-none border border-slate-800" placeholder="Caption nendang akan muncul di sini..."></textarea>
+                        </div>
+
+                        <!-- OUTPUT CTA -->
+                        <div class="bg-slate-800/50 border border-slate-700 p-5 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h2 class="font-bold text-pink-400">💬 Call To Action (CTA)</h2>
+                                <button onclick="copyTeks('outputCTA')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                            <textarea id="outputCTA" rows="3" class="w-full bg-slate-900 rounded-xl p-4 text-sm text-slate-200 outline-none resize-none border border-slate-800" placeholder="Kalimat penutup sakti..."></textarea>
+                        </div>
+
+                        <!-- OUTPUT HASHTAG -->
+                        <div class="bg-slate-800/50 border border-slate-700 p-5 rounded-2xl">
+                            <div class="flex justify-between items-center mb-3">
+                                <h2 class="font-bold text-cyan-400">#️⃣ Hashtag Viral</h2>
+                                <button onclick="copyTeks('outputHashtag')" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded-lg transition"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                            <textarea id="outputHashtag" rows="3" class="w-full bg-slate-900 rounded-xl p-4 text-sm text-slate-200 outline-none resize-none border border-slate-800" placeholder="#NPA #3iReborn ..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- AI LOADING MODAL (LAYAR HITAM V2) -->
+    <div id="aiLoading" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center z-50 transition-all">
+        <div class="bg-slate-900 rounded-3xl border border-slate-700 p-10 w-[360px] text-center shadow-[0_0_50px_rgba(6,182,212,0.2)]">
+            <div class="text-6xl animate-spin mb-6">⚙️</div>
+            <h2 class="text-2xl font-bold">Mesin AI Meracik...</h2>
+            <p class="text-slate-400 mt-3 text-sm">Menyuntikkan 5 formula desain visual & copywriting nendang.</p>
+            <div class="mt-8 h-3 rounded-full bg-slate-800 overflow-hidden relative">
+                <div class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-blue-500 via-cyan-400 to-yellow-400 animate-[pulse_1s_ease-in-out_infinite]"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MESIN JAVASCRIPT V4.2 -->
     <script>
-        // MANTRA AUTO-SAVE: Cek memori HP saat web dibuka
-        document.addEventListener("DOMContentLoaded", function() {
+        // 1. Hapus Splash Screen
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                const splash = document.getElementById("loadingScreen");
+                splash.style.opacity = '0';
+                setTimeout(() => splash.style.display = "none", 500);
+            }, 1000);
+
+            // Auto Load API Key
             const savedKey = localStorage.getItem("fbpro_api_key");
-            if (savedKey) {
-                document.getElementById("apiKey").value = savedKey;
-            }
+            if (savedKey) document.getElementById("apiKey").value = savedKey;
         });
 
-        // FUNGSI MENAMPILKAN KOTAK CUSTOM PRODUK
+        // 2. Sidebar Mobile Toggle
+        document.getElementById("btnSidebar").addEventListener("click", function () {
+            document.querySelector("aside").classList.toggle("hidden");
+        });
+
+        // 3. Custom Product Input
         function toggleCustomInput() {
             const productSelect = document.getElementById('product').value;
             const customInput = document.getElementById('customProduct');
-            if (productSelect === 'Custom') {
-                customInput.classList.remove('hidden');
-            } else {
-                customInput.classList.add('hidden');
-            }
+            if (productSelect === 'Custom') customInput.classList.remove('hidden');
+            else customInput.classList.add('hidden');
         }
 
+        // 4. File Upload Preview Base64
         let base64Image = "";
-        document.getElementById('imageInput').addEventListener('change', function(e) {
+        document.getElementById('photoUpload').addEventListener('change', function(e) {
             const reader = new FileReader();
             reader.onload = function(event) {
-                document.getElementById('imagePreview').src = event.target.result;
-                document.getElementById('previewContainer').classList.remove('hidden');
+                document.getElementById('previewImage').src = event.target.result;
                 base64Image = event.target.result.split(',')[1];
             };
-            reader.readAsDataURL(e.target.files[0]);
+            if(e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
         });
 
-        document.getElementById('generateBtn').addEventListener('click', async function() {
+        // 5. COPY FUNCTION
+        function copyTeks(id) { 
+            const textToCopy = document.getElementById(id);
+            textToCopy.select(); 
+            document.execCommand('copy'); 
+            alert("Berhasil disalin ke memori HP, Komandan! 🫡"); 
+        }
+
+        // 6. CORE AI ENGINE GEMINI
+        document.getElementById('btnGenerateAll').addEventListener('click', async function() {
             const apiKey = document.getElementById('apiKey').value.trim();
             const style = document.getElementById('style').value;
             
-            // Logika untuk mengambil nilai produk (Dropdown atau Custom Input)
             let product = document.getElementById('product').value;
             if (product === 'Custom') {
                 product = document.getElementById('customProduct').value.trim();
                 if (!product) return alert("Komandan, ketik dulu nama produk custom-nya! 🫡");
             }
             
-            if (!apiKey || !base64Image) return alert("Komandan, Isi API Key & Upload Foto dulu! 🫡");
+            if (!apiKey || !base64Image) return alert("Komandan, Isi API Key & Pilih Foto dulu! 🫡");
 
-            // MANTRA AUTO-SAVE: Simpan API Key ke memori HP saat klik Generate
+            // Simpan Kunci
             localStorage.setItem("fbpro_api_key", apiKey);
 
-            const btn = document.getElementById('generateBtn');
-            const loader = document.getElementById('loader');
-            const btnText = document.getElementById('btnText');
-            
-            btn.disabled = true;
-            btnText.innerText = "MERACIK V4.2...";
-            loader.style.display = "block";
+            // Tampilkan Modal Loading Keren
+            const loadingModal = document.getElementById('aiLoading');
+            loadingModal.classList.remove('hidden');
+            loadingModal.classList.add('flex');
 
             const promptText = `Anda adalah Ahli Copywriting & Desain FB Pro. Analisa gambar yang dilampirkan, buatkan konten untuk produk [${product}]. Gaya penulisan: [${style}]. 
             BALAS HANYA DENGAN JSON VALID: {
@@ -197,36 +331,33 @@
                 if (data.error) throw new Error(data.error.message);
                 
                 if (!data.candidates || data.candidates.length === 0) {
-                    throw new Error("Mesin AI menolak gambar ini. Biasanya karena filter keamanan Google (Safety). Coba gunakan foto lain, Ndan!");
+                    throw new Error("Mesin AI menolak gambar ini (Filter Keamanan). Coba foto lain!");
                 }
                 
                 const firstCandidate = data.candidates[0];
                 if (!firstCandidate.content || !firstCandidate.content.parts) {
-                    throw new Error("Diblokir oleh sistem keamanan AI. Biasanya karena foto wajah terlalu dekat atau dianggap sensitif. Coba foto yang lebih umum!");
+                    throw new Error("Diblokir sistem keamanan AI. Coba foto yang lebih umum/bukan wajah close-up!");
                 }
 
                 let rawText = firstCandidate.content.parts[0].text.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim();
                 const resultJSON = JSON.parse(rawText);
 
-                document.getElementById('outPrompt').value = resultJSON.prompt;
-                document.getElementById('outCaption').value = resultJSON.caption;
-                document.getElementById('outCTA').value = resultJSON.cta;
-                document.getElementById('outHashtag').value = resultJSON.hashtag;
-                document.getElementById('outputSection').classList.remove('hidden');
+                document.getElementById('outputPrompt').value = resultJSON.prompt;
+                document.getElementById('outputCaption').value = resultJSON.caption;
+                document.getElementById('outputCTA').value = resultJSON.cta;
+                document.getElementById('outputHashtag').value = resultJSON.hashtag;
+                
             } catch (e) { 
                 alert("Lapor Ndan Error: " + e.message); 
             } finally { 
-                btn.disabled = false; 
-                btnText.innerText = "🚀 GENERATE KONTEN";
-                loader.style.display = "none"; 
+                // Sembunyikan Modal Loading
+                loadingModal.classList.remove('flex');
+                loadingModal.classList.add('hidden');
+                
+                // Scroll halus ke area hasil
+                document.getElementById("outputSection").scrollIntoView({ behavior: 'smooth' });
             }
         });
-
-        function copyTeks(id) { 
-            document.getElementById(id).select(); 
-            document.execCommand('copy'); 
-            alert("Berhasil di-copy, Ndan! 🫡"); 
-        }
     </script>
 </body>
 </html>
