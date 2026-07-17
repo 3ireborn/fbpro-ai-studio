@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB PRO AI STUDIO V3.9</title>
+    <title>FB PRO AI STUDIO V4.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -19,9 +19,10 @@
     <div class="max-w-4xl w-full space-y-6">
         
         <!-- HEADER -->
-        <div class="text-center mb-6">
-            <h1 class="text-3xl font-black text-white uppercase tracking-wide">FB PRO <span class="text-gold">AI STUDIO</span></h1>
-            <p class="text-slate-400 text-sm">V3.9: Pabrik Konten Viral & Edukasi API</p>
+        <div class="text-center mb-6 relative">
+            <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block shadow-[0_0_15px_rgba(220,38,38,0.6)]">V4.0 Super Engine</span>
+            <h1 class="text-3xl font-black text-white uppercase tracking-wide mt-2">FB PRO <span class="text-gold">AI STUDIO</span></h1>
+            <p class="text-slate-400 text-sm">Dilengkapi Fitur Visual Master (5 Formula Desain)</p>
         </div>
 
         <!-- INPUT SECTION -->
@@ -69,7 +70,7 @@
                 </div>
             </div>
 
-            <button id="generateBtn" class="w-full bg-gold hover:opacity-90 text-slate-900 font-black py-4 rounded-xl transition-all">
+            <button id="generateBtn" class="w-full bg-gold hover:opacity-90 text-slate-900 font-black py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]">
                 <span id="btnText">🚀 GENERATE KONTEN</span>
                 <div class="loader" id="loader"></div>
             </button>
@@ -78,8 +79,8 @@
         <!-- OUTPUT SECTION -->
         <div id="outputSection" class="glass p-6 rounded-2xl shadow-xl space-y-6 hidden">
             <div class="space-y-2">
-                <label class="text-xs font-bold text-slate-400 uppercase">Prompt Thumbnail (Judul + Deskripsi + 3 Kata + Rasio 1:1)</label>
-                <textarea id="outPrompt" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-4 text-sm h-40 resize-none leading-relaxed"></textarea>
+                <label class="text-xs font-bold text-slate-400 uppercase">Prompt Thumbnail (Sudah Injeksi 5 Formula Visual)</label>
+                <textarea id="outPrompt" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-4 text-sm h-48 resize-none leading-relaxed text-emerald-300"></textarea>
                 <button onclick="copyTeks('outPrompt')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-bold transition">📋 Copy Super Prompt</button>
             </div>
 
@@ -137,12 +138,13 @@
             const btnText = document.getElementById('btnText');
             
             btn.disabled = true;
-            btnText.innerText = "MERACIK V3.9...";
+            btnText.innerText = "MERACIK V4.0...";
             loader.style.display = "block";
 
-            const promptText = `Anda adalah Ahli Copywriting FB Pro. Analisa gambar yang dilampirkan, buatkan konten untuk produk [${product}]. Gaya penulisan: [${style}]. 
+            // SUNTIKAN 5 FORMULA VISUAL DEWA DI SINI
+            const promptText = `Anda adalah Ahli Copywriting & Desain FB Pro. Analisa gambar yang dilampirkan, buatkan konten untuk produk [${product}]. Gaya penulisan: [${style}]. 
             BALAS HANYA DENGAN JSON VALID: {
-                "prompt": "Buatkan 1 paragraf prompt gambar yang menggabungkan: 1 kalimat Judul (Headline) menghipnotis, deskripsi visual gambar, lalu instruksi teks overlay 3 kata (Hook-Masalah-Solusi) mencolok warna Putih-Kuning-Merah. Akhiri dengan perintah: 'Gunakan aspek rasio 1:1'.", 
+                "prompt": "Buatkan 1 paragraf prompt gambar yang menggabungkan: 1 kalimat Judul (Headline) menghipnotis, lalu deskripsi visual yang WAJIB menggunakan angle kamera dramatis (Shoot Angle), dimensi kedalaman (Background & Foreground), dan Efek Lensa (seperti fish eye lens). Jadikan produk/objek dari gambar asli sebagai model utama. Tambahkan instruksi teks overlay 3 kata (Hook-Masalah-Solusi) menggunakan Style Typography 3D Bold Gradient dengan warna Putih-Kuning-Merah. Akhiri dengan perintah: 'Gunakan aspek rasio 1:1'.", 
                 "caption": "Buatkan caption FB. PERHATIAN: Panjang dan format teks WAJIB menyesuaikan gaya [${style}]. Jika gaya yang dipilih adalah FOMO, Sarkas, atau Pro-Kontra, JANGAN mendongeng. Buat paragrafnya SINGKAT, padat, nendang. Promosikan [${product}].", 
                 "cta": "Kalimat Call to Action", 
                 "hashtag": "5-7 hashtag relevan"
