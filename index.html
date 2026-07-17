@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB PRO AI STUDIO V4.0</title>
+    <title>FB PRO AI STUDIO V4.2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -20,9 +20,9 @@
         
         <!-- HEADER -->
         <div class="text-center mb-6 relative">
-            <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block shadow-[0_0_15px_rgba(220,38,38,0.6)]">V4.0 Super Engine</span>
+            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block shadow-[0_0_15px_rgba(37,99,235,0.6)]">V4.2 Custom Product</span>
             <h1 class="text-3xl font-black text-white uppercase tracking-wide mt-2">FB PRO <span class="text-gold">AI STUDIO</span></h1>
-            <p class="text-slate-400 text-sm">Dilengkapi Fitur Visual Master (5 Formula Desain)</p>
+            <p class="text-slate-400 text-sm">Dilengkapi Input Custom Bisnis & Visual Master</p>
         </div>
 
         <!-- INPUT SECTION -->
@@ -59,14 +59,19 @@
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-slate-300 mb-2">📦 4. Produk / Bisnis</label>
-                    <select id="product" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
+                    <select id="product" onchange="toggleCustomInput()" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-all">
                         <option value="3iReborn">🛡️ 3iReborn</option>
                         <option value="Istikmal Syariah">🕌 Istikmal Syariah</option>
                         <option value="NPA">🤖 NPA</option>
                         <option value="Affiliate Digital">💻 Affiliate Digital</option>
+                        <option value="Affiliate shoope">👚 Affiliate shopee</option>
                         <option value="UMKM & Kuliner">🍱 UMKM & Kuliner</option>
                         <option value="Produk Herbal & Kesehatan">🌿 Produk Herbal & Kesehatan</option>
+                        <option value="Properti & Real Estate">🏠 Properti & Real Estate</option>
+                        <option value="Custom">✍️ Produk Lainnya (Custom)</option>
                     </select>
+                    <!-- Input text tersembunyi untuk Custom Produk -->
+                    <input type="text" id="customProduct" placeholder="Ketik nama bisnis/produk di sini..." class="w-full bg-slate-700 border border-amber-500 rounded-lg px-4 py-3 text-white mt-3 hidden transition-all shadow-[0_0_10px_rgba(245,158,11,0.2)]">
                 </div>
             </div>
 
@@ -115,6 +120,25 @@
     </div>
 
     <script>
+        // MANTRA AUTO-SAVE: Cek memori HP saat web dibuka
+        document.addEventListener("DOMContentLoaded", function() {
+            const savedKey = localStorage.getItem("fbpro_api_key");
+            if (savedKey) {
+                document.getElementById("apiKey").value = savedKey;
+            }
+        });
+
+        // FUNGSI MENAMPILKAN KOTAK CUSTOM PRODUK
+        function toggleCustomInput() {
+            const productSelect = document.getElementById('product').value;
+            const customInput = document.getElementById('customProduct');
+            if (productSelect === 'Custom') {
+                customInput.classList.remove('hidden');
+            } else {
+                customInput.classList.add('hidden');
+            }
+        }
+
         let base64Image = "";
         document.getElementById('imageInput').addEventListener('change', function(e) {
             const reader = new FileReader();
@@ -129,19 +153,27 @@
         document.getElementById('generateBtn').addEventListener('click', async function() {
             const apiKey = document.getElementById('apiKey').value.trim();
             const style = document.getElementById('style').value;
-            const product = document.getElementById('product').value;
+            
+            // Logika untuk mengambil nilai produk (Dropdown atau Custom Input)
+            let product = document.getElementById('product').value;
+            if (product === 'Custom') {
+                product = document.getElementById('customProduct').value.trim();
+                if (!product) return alert("Komandan, ketik dulu nama produk custom-nya! 🫡");
+            }
             
             if (!apiKey || !base64Image) return alert("Komandan, Isi API Key & Upload Foto dulu! 🫡");
+
+            // MANTRA AUTO-SAVE: Simpan API Key ke memori HP saat klik Generate
+            localStorage.setItem("fbpro_api_key", apiKey);
 
             const btn = document.getElementById('generateBtn');
             const loader = document.getElementById('loader');
             const btnText = document.getElementById('btnText');
             
             btn.disabled = true;
-            btnText.innerText = "MERACIK V4.0...";
+            btnText.innerText = "MERACIK V4.2...";
             loader.style.display = "block";
 
-            // SUNTIKAN 5 FORMULA VISUAL DEWA DI SINI
             const promptText = `Anda adalah Ahli Copywriting & Desain FB Pro. Analisa gambar yang dilampirkan, buatkan konten untuk produk [${product}]. Gaya penulisan: [${style}]. 
             BALAS HANYA DENGAN JSON VALID: {
                 "prompt": "Buatkan 1 paragraf prompt gambar yang menggabungkan: 1 kalimat Judul (Headline) menghipnotis, lalu deskripsi visual yang WAJIB menggunakan angle kamera dramatis (Shoot Angle), dimensi kedalaman (Background & Foreground), dan Efek Lensa (seperti fish eye lens). Jadikan produk/objek dari gambar asli sebagai model utama. Tambahkan instruksi teks overlay 3 kata (Hook-Masalah-Solusi) menggunakan Style Typography 3D Bold Gradient dengan warna Putih-Kuning-Merah. Akhiri dengan perintah: 'Gunakan aspek rasio 1:1'.", 
