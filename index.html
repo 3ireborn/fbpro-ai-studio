@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB PRO AI STUDIO V3.8</title>
+    <title>FB PRO AI STUDIO V3.9</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -17,24 +17,36 @@
 </head>
 <body class="min-h-screen p-4 flex justify-center items-start">
     <div class="max-w-4xl w-full space-y-6">
-                <div class="text-center mb-6">
+        
+        <!-- HEADER -->
+        <div class="text-center mb-6">
             <h1 class="text-3xl font-black text-white uppercase tracking-wide">FB PRO <span class="text-gold">AI STUDIO</span></h1>
-            <p class="text-slate-400 text-sm">V3.8: Anti-Error & Auto-JSON Engine</p>
+            <p class="text-slate-400 text-sm">V3.9: Pabrik Konten Viral & Edukasi API</p>
         </div>
 
+        <!-- INPUT SECTION -->
         <div class="glass p-6 rounded-2xl shadow-xl space-y-6">
+            
+            <!-- API Key -->
             <div>
-                <label class="block text-sm font-bold text-gold mb-2">🔑 API Key</label>
-                <input type="password" id="apiKey" placeholder="Paste API Key..." class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
+                <div class="flex justify-between items-end mb-2">
+                    <label class="block text-sm font-bold text-gold uppercase tracking-wider">🔑 1. API Key</label>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-xs bg-red-600 hover:bg-red-500 text-white font-bold px-3 py-1 rounded-full shadow-lg transition-all animate-pulse">Buat API Key Di Sini (Gratis)</a>
+                </div>
+                <input type="password" id="apiKey" placeholder="Paste API Key Ndan di sini..." class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
             </div>
+
+            <!-- Upload Foto -->
             <div>
-                <label class="block text-sm font-bold text-gold mb-2">📸 Upload Foto</label>
+                <label class="block text-sm font-bold text-gold mb-2">📸 2. Upload Foto / Produk</label>
                 <input type="file" id="imageInput" accept="image/*" class="w-full text-slate-300">
                 <div class="mt-4 hidden" id="previewContainer"><img id="imagePreview" class="max-h-48 rounded-xl mx-auto" src="" alt="Preview"></div>
             </div>
+
+            <!-- Gaya & Produk -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2">🎭 Gaya Bahasa</label>
+                    <label class="block text-sm font-bold text-slate-300 mb-2">🎭 3. Gaya Bahasa</label>
                     <select id="style" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
                         <option value="FOMO (Fear Of Missing Out), menakut-nakuti agar merasa rugi">🔥 FOMO</option>
                         <option value="Pro Kontra, memancing perdebatan agar viral">⚔️ Pro Kontra</option>
@@ -45,7 +57,7 @@
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-slate-300 mb-2">📦 Produk / Bisnis</label>
+                    <label class="block text-sm font-bold text-slate-300 mb-2">📦 4. Produk / Bisnis</label>
                     <select id="product" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white">
                         <option value="3iReborn">🛡️ 3iReborn</option>
                         <option value="Istikmal Syariah">🕌 Istikmal Syariah</option>
@@ -56,23 +68,27 @@
                     </select>
                 </div>
             </div>
-            <button id="generateBtn" class="w-full bg-gold text-slate-900 font-black py-4 rounded-xl">
+
+            <button id="generateBtn" class="w-full bg-gold hover:opacity-90 text-slate-900 font-black py-4 rounded-xl transition-all">
                 <span id="btnText">🚀 GENERATE KONTEN</span>
                 <div class="loader" id="loader"></div>
             </button>
         </div>
 
+        <!-- OUTPUT SECTION -->
         <div id="outputSection" class="glass p-6 rounded-2xl shadow-xl space-y-6 hidden">
             <div class="space-y-2">
                 <label class="text-xs font-bold text-slate-400 uppercase">Prompt Thumbnail (Judul + Deskripsi + 3 Kata + Rasio 1:1)</label>
                 <textarea id="outPrompt" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-4 text-sm h-40 resize-none leading-relaxed"></textarea>
                 <button onclick="copyTeks('outPrompt')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-bold transition">📋 Copy Super Prompt</button>
             </div>
+
             <div class="space-y-2">
                 <label class="text-xs font-bold text-slate-400 uppercase">Caption Facebook Pro</label>
                 <textarea id="outCaption" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-4 text-sm h-56 resize-none leading-relaxed"></textarea>
                 <button onclick="copyTeks('outCaption')" class="w-full bg-slate-700 hover:bg-slate-600 text-white py-3 rounded-lg font-bold transition">📋 Copy Caption</button>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Call To Action (CTA)</label>
@@ -86,7 +102,16 @@
                 </div>
             </div>
         </div>
-            </div>
+
+        <!-- FOOTER EDUKASI -->
+        <div class="mt-8 pt-6 border-t border-slate-700 text-center space-y-2 pb-8">
+            <h3 class="text-sm font-bold text-slate-300">💡 Kenapa Harus Pakai API Key Sendiri?</h3>
+            <p class="text-xs text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                API Key adalah "kunci akses" rahasia untuk menyambungkan aplikasi ini langsung ke otak superkomputer Google (Gemini AI). Dengan memakai kunci Anda sendiri, aplikasi ini bisa berjalan super cepat murni di dalam <i>browser</i> HP Anda, tanpa kami harus menyewa <i>server</i> perantara yang mahal. Artinya? <b>Privasi foto Anda 100% aman</b> dan Anda bisa menggunakannya <b>GRATIS!</b>
+            </p>
+        </div>
+
+    </div>
 
     <script>
         let base64Image = "";
@@ -112,7 +137,7 @@
             const btnText = document.getElementById('btnText');
             
             btn.disabled = true;
-            btnText.innerText = "MERACIK V3.8...";
+            btnText.innerText = "MERACIK V3.9...";
             loader.style.display = "block";
 
             const promptText = `Anda adalah Ahli Copywriting FB Pro. Analisa gambar yang dilampirkan, buatkan konten untuk produk [${product}]. Gaya penulisan: [${style}]. 
@@ -171,4 +196,3 @@
     </script>
 </body>
 </html>
-
