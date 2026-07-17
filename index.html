@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB PRO AI STUDIO</title>
+    <title>FB PRO AI STUDIO V3.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -12,7 +12,6 @@
         .bg-gold { background: linear-gradient(to right, #d97706, #f59e0b, #fbbf24); }
         .text-gold { color: #fbbf24; }
         .glass { background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); }
-        /* Loader CSS */
         .loader { border: 4px solid #334155; border-top: 4px solid #fbbf24; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: none; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
@@ -22,51 +21,76 @@
     <div class="max-w-4xl w-full space-y-6">
         
         <!-- HEADER -->
-        <div class="text-center space-y-2 mb-6">
+        <div class="text-center space-y-2 mb-6 relative">
+            <span class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-2 inline-block">Versi 3.1 Ultimate</span>
             <h1 class="text-3xl md:text-5xl font-black text-white font-m uppercase tracking-wide">
                 FB PRO <span class="text-gold">AI STUDIO</span>
             </h1>
-            <p class="text-slate-400">Sederhana, Cepat, Langsung Jadi. (Support Closing 3IReborn)</p>
+            <p class="text-slate-400">Pabrik Konten Viral: Upload ➜ Pilih Gaya ➜ Pilih Produk ➜ Generate!</p>
         </div>
 
         <!-- INPUT SECTION -->
         <div class="glass p-6 rounded-2xl shadow-xl space-y-6">
+            
             <!-- API Key -->
             <div>
-                <label class="block text-sm font-bold text-gold uppercase tracking-wider mb-2">1. Masukkan Gemini API Key</label>
-                <input type="password" id="apiKey" placeholder="Paste API Key di sini..." class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500">
+                <label class="block text-sm font-bold text-gold uppercase tracking-wider mb-2">🔑 1. API Key (Gemini 2.5 Flash)</label>
+                <input type="password" id="apiKey" placeholder="Paste API Key Ndan di sini..." class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500">
             </div>
 
             <!-- Upload Foto -->
             <div>
-                <label class="block text-sm font-bold text-gold uppercase tracking-wider mb-2">2. Upload Foto / Produk</label>
+                <label class="block text-sm font-bold text-gold uppercase tracking-wider mb-2">📸 2. Upload Foto / Produk</label>
                 <input type="file" id="imageInput" accept="image/*" class="w-full text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-amber-500 file:text-slate-900 hover:file:bg-amber-400 cursor-pointer">
                 
-                <!-- Preview Foto -->
                 <div class="mt-4 hidden" id="previewContainer">
                     <img id="imagePreview" class="max-h-64 rounded-xl border-2 border-slate-600 mx-auto" src="" alt="Preview">
                 </div>
             </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dropdown Gaya -->
+                <div>
+                    <label class="block text-sm font-bold text-gold uppercase tracking-wider mb-2">🎭 3. Pilih Gaya Bahasa</label>
+                    <select id="style" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 appearance-none">
+                        <option value="FOMO (Fear Of Missing Out), menakut-nakuti audiens agar merasa rugi dan takut ketinggalan peluang emas">🔥 FOMO (Takut Ketinggalan)</option>
+                        <option value="Pro Kontra, gaya bahasa yang memancing polarisasi, perdebatan, dan diskusi panas di kolom komentar agar viral">⚔️ Pro & Kontra (Bikin Rame)</option>
+                        <option value="Sarkas dan menohok, menyindir kebiasaan buruk audiens dengan halus namun mengena">😏 Sarkas (Nyindir Halus)</option>
+                        <option value="Storytelling, emosional, menceritakan kisah nyata yang relate dengan penderitaan pembaca">📖 Storytelling (Emosional)</option>
+                        <option value="Motivasi, membakar semangat, inspiratif, dan mengajak bangkit dari kegagalan">🔥 Motivasi (Semangat)</option>
+                        <option value="Edukasi, memberikan tips praktis atau ilmu daging yang bermanfaat langsung">💡 Edukasi (Ilmu Daging)</option>
+                    </select>
+                </div>
+
+                <!-- Dropdown Produk -->
+                <div>
+                    <label class="block text-sm font-bold text-gold uppercase tracking-wider mb-2">📦 4. Pilih Produk / Bisnis</label>
+                    <select id="product" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 appearance-none">
+                        <option value="3iReborn (Solusi proteksi, investasi, dan pasif income miliaran dari rumah)">🛡️ 3iReborn</option>
+                        <option value="Istikmal Syariah (Solusi bisnis syariah yang berkah, aman, dan anti riba)">🕌 Istikmal Syariah</option>
+                        <option value="NPA / Nganggur Preneur Akademi (Solusi kaum rebahan/nganggur dapat duit miliaran pakai AI dan sistem otomatis)">🤖 NPA (Nganggur Preneur)</option>
+                        <option value="Affiliate Digital (Solusi cuan instan dari jualan produk digital tanpa stok barang)">💻 Affiliate Digital</option>
+                    </select>
+                </div>
+            </div>
+
             <!-- Generate Button -->
-            <button id="generateBtn" class="w-full bg-gold hover:opacity-90 text-slate-900 font-black py-4 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all uppercase tracking-widest text-lg font-m flex justify-center items-center gap-3">
-                <span id="btnText">🚀 GENERATE KONTEN</span>
+            <button id="generateBtn" class="w-full bg-gold hover:opacity-90 text-slate-900 font-black py-4 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all uppercase tracking-widest text-lg font-m flex justify-center items-center gap-3 mt-4">
+                <span id="btnText">🚀 GENERATE KONTEN V3.1</span>
                 <div class="loader" id="loader"></div>
             </button>
         </div>
 
         <!-- OUTPUT SECTION -->
         <div id="outputSection" class="glass p-6 rounded-2xl shadow-xl space-y-6 hidden">
-            <h2 class="text-xl font-bold text-emerald-400 font-m text-center border-b border-slate-700 pb-4">✅ KONTEN SIAP COPY</h2>
+            <h2 class="text-xl font-bold text-emerald-400 font-m text-center border-b border-slate-700 pb-4">✅ KONTEN VIRAL SIAP COPY</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Prompt Thumbnail -->
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Prompt Thumbnail</label>
                     <textarea id="outPrompt" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-24 resize-none"></textarea>
                     <button onclick="copyTeks('outPrompt')" class="w-full bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold py-2 rounded">📋 Copy Prompt</button>
                 </div>
-                <!-- Overlay -->
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Teks Overlay CTR Tinggi</label>
                     <textarea id="outOverlay" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-24 resize-none"></textarea>
@@ -74,21 +98,18 @@
                 </div>
             </div>
 
-            <!-- Caption -->
             <div class="space-y-2">
                 <label class="text-xs font-bold text-slate-400 uppercase">Caption Facebook Pro</label>
-                <textarea id="outCaption" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-40 resize-none"></textarea>
+                <textarea id="outCaption" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-48 resize-none"></textarea>
                 <button onclick="copyTeks('outCaption')" class="w-full bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold py-2 rounded">📋 Copy Caption</button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- CTA -->
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Call To Action (CTA)</label>
                     <textarea id="outCTA" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-20 resize-none"></textarea>
                     <button onclick="copyTeks('outCTA')" class="w-full bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold py-2 rounded">📋 Copy CTA</button>
                 </div>
-                <!-- Hashtag -->
                 <div class="space-y-2">
                     <label class="text-xs font-bold text-slate-400 uppercase">Hashtag</label>
                     <textarea id="outHashtag" readonly class="w-full bg-slate-800 border border-slate-600 rounded-lg p-3 text-sm h-20 resize-none"></textarea>
@@ -102,7 +123,7 @@
     <script>
         let base64Image = "";
 
-        // Tampilkan Preview Foto
+        // Fungsi Preview Foto
         document.getElementById('imageInput').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -111,18 +132,19 @@
             reader.onload = function(event) {
                 document.getElementById('imagePreview').src = event.target.result;
                 document.getElementById('previewContainer').classList.remove('hidden');
-                
-                // Ambil base64 data (buang header meta datanya)
                 base64Image = event.target.result.split(',')[1];
             };
             reader.readAsDataURL(file);
         });
 
-        // Eksekusi API
+        // Eksekusi API V3.1
         document.getElementById('generateBtn').addEventListener('click', async function() {
             const apiKey = document.getElementById('apiKey').value.trim();
+            const style = document.getElementById('style').value;
+            const product = document.getElementById('product').value;
+            
             if (!apiKey) return alert("Komandan, API Key wajib diisi dulu!");
-            if (!base64Image) return alert("Komandan, Foto wajib di-upload dulu!");
+            if (!base64Image) return alert("Komandan, Foto wajib di-upload dulu agar AI bisa menganalisa!");
 
             // UI Loading state
             const btn = document.getElementById('generateBtn');
@@ -131,14 +153,26 @@
             const outputSection = document.getElementById('outputSection');
             
             btn.disabled = true;
-            btnText.innerText = "SEDANG MENGANALISA...";
+            btnText.innerText = "MERACIK V3.1...";
             loader.style.display = "block";
             outputSection.classList.add('hidden');
 
-            const promptText = `Anda adalah Ahli Digital Marketing FB Pro spesialis closing bisnis 3IReborn. Analisa gambar ini dan hasilkan 5 hal berikut. BALAS HANYA DENGAN FORMAT JSON VALID tanpa teks tambahan apapun. Gunakan key ini persis: {"prompt": "Ide Prompt Thumbnail", "overlay": "Teks overlay Clickbait max 4 kata", "caption": "Caption storytelling yang emosional dan jualan", "cta": "Kalimat ajakan klik link/komen", "hashtag": "#hashtag1 #hashtag2"}`;
+            // Super Prompt V3.1
+            const promptText = `Anda adalah Ahli Digital Marketing spesialis jualan di FB Pro. 
+            Tugas Anda: Analisa gambar yang dilampirkan, lalu buatkan materi konten untuk mempromosikan produk/bisnis: [${product}].
+            Gunakan gaya bahasa penulisan: [${style}]. 
+            
+            BALAS HANYA DENGAN FORMAT JSON VALID tanpa tambahan teks apapun. Gunakan key persis seperti ini:
+            {
+                "prompt": "Ide perintah/prompt singkat untuk mengulang membuat gambar ini di AI lain",
+                "overlay": "Teks singkat clickbait untuk di gambar (max 4 kata)",
+                "caption": "Caption panjang yang relevan dengan gambar, menggunakan gaya bahasa yang dipilih, dan soft-selling mengarahkan ke produk yang dipilih",
+                "cta": "Kalimat Call to Action yang kuat",
+                "hashtag": "5-7 hashtag relevan dengan konten dan produk"
+            }`;
 
             try {
-                // BUG FIX: Menggunakan mesin gemini-2.5-flash sesuai instruksi Komandan
+                // Menembak langsung ke gemini-2.5-flash
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -156,28 +190,28 @@
                 
                 if(data.error) throw new Error(data.error.message);
 
-                // Ekstrak dan bersihkan JSON dari Gemini
+                // Ekstrak & bersihkan JSON
                 let rawText = data.candidates[0].content.parts[0].text;
                 rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
                 const resultJSON = JSON.parse(rawText);
 
-                // Tampilkan ke textarea
+                // Injeksi data ke textarea
                 document.getElementById('outPrompt').value = resultJSON.prompt || "Gagal membuat prompt.";
                 document.getElementById('outOverlay').value = resultJSON.overlay || "Gagal membuat overlay.";
                 document.getElementById('outCaption').value = resultJSON.caption || "Gagal membuat caption.";
                 document.getElementById('outCTA').value = resultJSON.cta || "Gagal membuat CTA.";
                 document.getElementById('outHashtag').value = resultJSON.hashtag || "Gagal membuat hashtag.";
 
-                // Munculkan hasil
+                // Tampilkan hasil
                 outputSection.classList.remove('hidden');
                 outputSection.scrollIntoView({ behavior: 'smooth' });
 
             } catch (error) {
-                alert("Gagal Ndan! Pastikan API Key benar atau gambar tidak terlalu besar. Error: " + error.message);
+                alert("Gagal Ndan! Error: " + error.message);
             } finally {
-                // Kembalikan UI
+                // Reset Tombol
                 btn.disabled = false;
-                btnText.innerText = "🚀 GENERATE KONTEN";
+                btnText.innerText = "🚀 GENERATE KONTEN V3.1";
                 loader.style.display = "none";
             }
         });
@@ -187,7 +221,7 @@
             const teks = document.getElementById(elementId);
             teks.select();
             document.execCommand('copy');
-            alert("Teks berhasil di-copy! Siap tempur, Ndan! 🫡");
+            alert("Berhasil di-copy, Ndan! 🫡");
         }
     </script>
 </body>
